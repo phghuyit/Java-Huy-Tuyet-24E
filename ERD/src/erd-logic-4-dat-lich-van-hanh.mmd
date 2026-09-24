@@ -1,0 +1,80 @@
+erDiagram
+    CUSTOMERS ||--o{ APPOINTMENTS : "dat"
+    APPOINTMENTS ||--|{ APPOINTMENT_ITEMS : "gom"
+    SERVICES ||--o{ APPOINTMENT_ITEMS : "la dich vu"
+    STAFF ||--o{ APPOINTMENT_ITEMS : "thuc hien"
+    RESOURCES ||--o{ APPOINTMENT_ITEMS : "bi chiem dung"
+    CUSTOMER_PACKAGES ||--o{ APPOINTMENT_ITEMS : "tru buoi"
+    APPOINTMENTS ||--o{ BOOKING_EVENTS : "nhat ky"
+    APPOINTMENTS ||--o| REVIEWS : "duoc danh gia"
+    APPOINTMENTS ||--o{ NOTIFICATION_LOGS : "gui email"
+    CUSTOMERS ||--o{ WAITLIST_ENTRIES : "dang ky cho"
+    SERVICES ||--o{ WAITLIST_ENTRIES : "cho dich vu"
+    VOUCHERS ||--o{ APPOINTMENTS : "ap dung"
+
+    APPOINTMENTS {
+        bigint id PK
+        varchar code UK
+        bigint customer_id FK
+        bigint voucher_id FK
+        datetime start_at
+        datetime end_at
+        varchar status
+        varchar channel "ONLINE|COUNTER"
+        decimal subtotal
+        decimal voucher_discount
+        decimal tier_discount
+        decimal point_discount
+        decimal total_amount
+        decimal deposit_amount
+        decimal paid_amount
+        datetime hold_expires_at
+        tinyint reschedule_count
+    }
+    APPOINTMENT_ITEMS {
+        bigint id PK
+        bigint appointment_id FK
+        bigint service_id FK
+        bigint staff_id FK
+        bigint resource_id FK
+        bigint customer_package_id FK
+        tinyint seq_no
+        datetime start_at
+        datetime end_at
+        decimal unit_price "dong bang"
+        decimal final_price
+        varchar status
+        text technical_note
+    }
+    BOOKING_EVENTS {
+        bigint id PK
+        bigint appointment_id FK
+        varchar event_type
+        varchar actor_type
+        bigint actor_id
+        json payload
+    }
+    REVIEWS {
+        bigint id PK
+        bigint appointment_id UK
+        bigint customer_id FK
+        tinyint rating
+        boolean is_hidden
+    }
+    WAITLIST_ENTRIES {
+        bigint id PK
+        bigint customer_id FK
+        bigint service_id FK
+        bigint staff_id FK
+        date desired_date
+        time time_from
+        time time_to
+        varchar status
+    }
+    NOTIFICATION_LOGS {
+        bigint id PK
+        bigint appointment_id FK
+        varchar event_type
+        varchar channel
+        varchar status
+    }

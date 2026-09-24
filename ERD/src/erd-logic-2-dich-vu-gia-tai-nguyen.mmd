@@ -1,0 +1,82 @@
+erDiagram
+    SERVICE_CATEGORIES ||--o{ SERVICES : "gom"
+    SERVICES ||--o{ SERVICE_IMAGES : "co anh"
+    SERVICES ||--o{ SERVICE_RESOURCES : "can tai nguyen"
+    RESOURCES ||--o{ SERVICE_RESOURCES : "duoc dung boi"
+    SERVICES ||--o{ SERVICE_MATERIALS : "tieu hao vat tu"
+    MATERIALS ||--o{ SERVICE_MATERIALS : "dinh muc"
+    SERVICES ||--o{ PRICE_RULES : "ap gia"
+    SERVICE_CATEGORIES ||--o{ PRICE_RULES : "ap gia theo nhom"
+    SERVICES ||--o{ PACKAGE_ITEMS : "thanh phan goi"
+    PACKAGES ||--|{ PACKAGE_ITEMS : "gom"
+
+    SERVICE_CATEGORIES {
+        bigint id PK
+        varchar name UK
+        tinyint display_order
+        varchar status
+    }
+    SERVICES {
+        bigint id PK
+        bigint category_id FK
+        varchar name
+        decimal price
+        int duration_min
+        int buffer_min
+        boolean requires_resource
+        varchar status
+    }
+    SERVICE_IMAGES {
+        bigint id PK
+        bigint service_id FK
+        varchar url
+    }
+    PRICE_RULES {
+        bigint id PK
+        bigint service_id FK
+        bigint category_id FK
+        tinyint day_of_week
+        time start_time
+        time end_time
+        varchar adjust_type "PERCENT|AMOUNT"
+        decimal adjust_value "am la giam"
+        date effective_from
+        date effective_to
+        tinyint priority
+    }
+    RESOURCES {
+        bigint id PK
+        varchar code UK
+        varchar type "CHAIR|BED|MACHINE|ROOM"
+        smallint quantity
+        varchar status
+    }
+    SERVICE_RESOURCES {
+        bigint service_id PK,FK
+        bigint resource_id PK,FK
+        smallint quantity
+    }
+    PACKAGES {
+        bigint id PK
+        varchar name
+        decimal price
+        int valid_days
+    }
+    PACKAGE_ITEMS {
+        bigint id PK
+        bigint package_id FK
+        bigint service_id FK
+        smallint sessions
+    }
+    MATERIALS {
+        bigint id PK
+        varchar code UK
+        varchar unit
+        decimal stock_qty
+        decimal min_qty
+    }
+    SERVICE_MATERIALS {
+        bigint service_id PK,FK
+        bigint material_id PK,FK
+        decimal quantity
+    }

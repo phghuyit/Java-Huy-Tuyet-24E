@@ -1,0 +1,92 @@
+erDiagram
+    ROLES ||--o{ USERS : "phan quyen"
+    USERS ||--o{ REFRESH_TOKENS : "phien dang nhap"
+    USERS ||--o{ PASSWORD_RESET_OTPS : "yeu cau dat lai"
+    USERS ||--o| CUSTOMERS : "la khach"
+    USERS ||--o| STAFF : "la nhan vien"
+    MEMBERSHIP_TIERS ||--o{ CUSTOMERS : "xep hang"
+    CUSTOMERS ||--o{ POINT_TRANSACTIONS : "so cai diem"
+    CUSTOMERS ||--o{ REFERRALS : "gioi thieu"
+    USERS ||--o{ NOTIFICATIONS : "nhan thong bao"
+    USERS ||--o{ AUDIT_LOGS : "thao tac"
+
+    ROLES {
+        bigint id PK
+        varchar code UK "ADMIN|RECEPTIONIST|STAFF|CUSTOMER"
+        varchar name
+    }
+    USERS {
+        bigint id PK
+        bigint role_id FK
+        varchar phone UK
+        varchar email UK
+        varchar password_hash
+        varchar status "ACTIVE|LOCKED"
+        tinyint failed_attempts
+        datetime locked_until
+    }
+    REFRESH_TOKENS {
+        bigint id PK
+        bigint user_id FK
+        char token_hash UK "SHA-256"
+        datetime expires_at
+        datetime revoked_at
+    }
+    PASSWORD_RESET_OTPS {
+        bigint id PK
+        bigint user_id FK
+        char otp_hash
+        datetime expires_at
+        tinyint attempts
+    }
+    CUSTOMERS {
+        bigint id PK
+        bigint user_id UK
+        bigint tier_id FK
+        varchar full_name
+        varchar phone UK
+        tinyint birth_day
+        tinyint birth_month
+        varchar allergy_note
+        int points_balance
+        int lifetime_points
+        int no_show_count
+        boolean is_blocked
+    }
+    MEMBERSHIP_TIERS {
+        bigint id PK
+        varchar name
+        int min_points UK
+        decimal discount_percent
+    }
+    POINT_TRANSACTIONS {
+        bigint id PK
+        bigint customer_id FK
+        bigint appointment_id FK
+        varchar type "EARN|REDEEM|ADJUST|EXPIRE"
+        int points
+        int balance_after
+    }
+    REFERRALS {
+        bigint id PK
+        bigint referrer_customer_id FK
+        bigint referred_customer_id UK
+        bigint qualifying_appointment_id FK
+        int reward_points
+        varchar status
+    }
+    NOTIFICATIONS {
+        bigint id PK
+        bigint user_id FK
+        varchar type
+        boolean is_read
+    }
+    AUDIT_LOGS {
+        bigint id PK
+        bigint user_id FK
+        varchar action
+        varchar entity
+        bigint entity_id
+        json old_value
+        json new_value
+    }

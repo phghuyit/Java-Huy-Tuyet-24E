@@ -1,0 +1,49 @@
+flowchart LR
+    classDef ent fill:#dbeafe,stroke:#1e40af,stroke-width:2px,color:#0f172a,font-weight:bold
+    classDef rel fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#0f172a
+    classDef weak fill:#e0e7ff,stroke:#4338ca,stroke-width:3px,color:#0f172a,font-weight:bold
+
+    DDV[DÒNG DỊCH VỤ]:::weak
+    DV[DỊCH VỤ]:::ent
+    VT[VẬT TƯ]:::ent
+    NCC[NHÀ CUNG CẤP]:::ent
+    PN[PHIẾU NHẬP KHO]:::ent
+    TK[BÚT TOÁN KHO]:::weak
+    TH[THỢ]:::ent
+    QT[QUY TẮC HOA HỒNG]:::ent
+    HH[HOA HỒNG]:::weak
+    KY[KỲ HOA HỒNG]:::ent
+    CD[CHIẾN DỊCH]:::ent
+    KH[KHÁCH HÀNG]:::ent
+
+    R_DINHMUC{ĐỊNH MỨC}:::rel
+    R_CUNGCAP{CUNG CẤP}:::rel
+    R_GOMDONG{GỒM DÒNG}:::rel
+    R_BIENDONG{LÀM BIẾN ĐỘNG}:::rel
+    R_XUATKHO{XUẤT KHO THEO}:::rel
+    R_SINHHH{SINH}:::rel
+    R_NHANHH{ĐƯỢC HƯỞNG}:::rel
+    R_APQT{TÍNH THEO}:::rel
+    R_CHOTKY{ĐƯỢC CHỐT VÀO}:::rel
+    R_GUIMAIL{GỬI TỚI}:::rel
+
+    DV ---|N| R_DINHMUC
+    R_DINHMUC ---|N| VT
+    NCC ---|1| R_CUNGCAP
+    R_CUNGCAP ---|N| PN
+    PN ---|1| R_GOMDONG
+    R_GOMDONG ---|N| TK
+    VT ---|1| R_BIENDONG
+    R_BIENDONG ---|N| TK
+    DDV ---|1| R_XUATKHO
+    R_XUATKHO ---|N| TK
+    DDV ---|1| R_SINHHH
+    R_SINHHH ---|1| HH
+    TH ---|1| R_NHANHH
+    R_NHANHH ---|N| HH
+    QT ---|1| R_APQT
+    R_APQT ---|N| HH
+    KY ---|1| R_CHOTKY
+    R_CHOTKY ---|N| HH
+    CD ---|1| R_GUIMAIL
+    R_GUIMAIL ---|N| KH

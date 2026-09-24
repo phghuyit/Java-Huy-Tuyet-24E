@@ -1,0 +1,53 @@
+flowchart LR
+    classDef ent fill:#dbeafe,stroke:#1e40af,stroke-width:2px,color:#0f172a,font-weight:bold
+    classDef rel fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#0f172a
+    classDef weak fill:#e0e7ff,stroke:#4338ca,stroke-width:3px,color:#0f172a,font-weight:bold
+
+    KH[KHÁCH HÀNG]:::ent
+    HANG[HẠNG THÀNH VIÊN]:::ent
+    LH[LỊCH HẸN]:::ent
+    DDV[DÒNG DỊCH VỤ]:::weak
+    TT[THANH TOÁN]:::ent
+    VC[VOUCHER]:::ent
+    GOI[GÓI LIỆU TRÌNH]:::ent
+    THE[THẺ LIỆU TRÌNH]:::ent
+    SD[SỐ DƯ BUỔI]:::weak
+    TQT[THẺ QUÀ TẶNG]:::ent
+    DIEM[BÚT TOÁN ĐIỂM]:::weak
+    GT[GIỚI THIỆU]:::ent
+
+    R_XEPHANG{ĐƯỢC XẾP}:::rel
+    R_THANHTOAN{ĐƯỢC THANH TOÁN}:::rel
+    R_APVC{ÁP DỤNG}:::rel
+    R_MUAGOI{MUA}:::rel
+    R_PHATSINH{PHÁT SINH TỪ}:::rel
+    R_SODU{CÓ SỐ DƯ}:::rel
+    R_TRUBUOI{TRỪ BUỔI}:::rel
+    R_MUATQT{SỞ HỮU}:::rel
+    R_DUNGTQT{DÙNG THANH TOÁN}:::rel
+    R_TICHDIEM{GHI NHẬN}:::rel
+    R_GTHIEU{GIỚI THIỆU}:::rel
+
+    HANG ---|1| R_XEPHANG
+    R_XEPHANG ---|N| KH
+    LH ---|1| R_THANHTOAN
+    R_THANHTOAN ---|N| TT
+    VC ---|1| R_APVC
+    R_APVC ---|N| LH
+    KH ---|1| R_MUAGOI
+    R_MUAGOI ---|N| THE
+    GOI ---|1| R_PHATSINH
+    R_PHATSINH ---|N| THE
+    THE ---|1| R_SODU
+    R_SODU ---|N| SD
+    THE ---|1| R_TRUBUOI
+    R_TRUBUOI ---|N| DDV
+    KH ---|1| R_MUATQT
+    R_MUATQT ---|N| TQT
+    TQT ---|1| R_DUNGTQT
+    R_DUNGTQT ---|N| LH
+    KH ---|1| R_TICHDIEM
+    R_TICHDIEM ---|N| DIEM
+    LH ---|1| R_TICHDIEM
+    KH ---|1| R_GTHIEU
+    R_GTHIEU ---|N| GT

@@ -1,0 +1,46 @@
+erDiagram
+    STAFF ||--o{ STAFF_SERVICES : "co ky nang"
+    SERVICES ||--o{ STAFF_SERVICES : "duoc lam boi"
+    STAFF ||--o{ WORK_SHIFTS : "lam ca"
+    STAFF ||--o{ STAFF_LEAVES : "xin nghi"
+    STAFF ||--o{ STAFF_BLOCKS : "bi chan gio"
+    STAFF ||--o{ APPOINTMENT_ITEMS : "thuc hien"
+    STAFF ||--o{ COMMISSIONS : "nhan hoa hong"
+
+    STAFF {
+        bigint id PK
+        bigint user_id UK
+        varchar full_name
+        varchar level "JUNIOR|SENIOR|MASTER"
+        decimal avg_rating
+        int rating_count
+        boolean is_active
+        datetime deleted_at
+    }
+    STAFF_SERVICES {
+        bigint staff_id PK,FK
+        bigint service_id PK,FK
+    }
+    WORK_SHIFTS {
+        bigint id PK
+        bigint staff_id FK
+        date work_date
+        time start_time
+        time end_time
+    }
+    STAFF_LEAVES {
+        bigint id PK
+        bigint staff_id FK
+        datetime start_at
+        datetime end_at
+        varchar leave_type
+        varchar status "PENDING|APPROVED|REJECTED"
+        bigint approved_by
+    }
+    STAFF_BLOCKS {
+        bigint id PK
+        bigint staff_id FK
+        datetime start_at
+        datetime end_at
+        varchar reason
+    }

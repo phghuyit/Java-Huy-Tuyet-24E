@@ -1,0 +1,83 @@
+erDiagram
+    APPOINTMENTS ||--o{ PAYMENTS : "thanh toan"
+    CUSTOMER_PACKAGES ||--o{ PAYMENTS : "mua the lieu trinh"
+    GIFT_CARDS ||--o{ PAYMENTS : "mua the qua tang"
+    GIFT_CARDS ||--|{ GIFT_CARD_TRANSACTIONS : "bien dong so du"
+    APPOINTMENTS ||--o{ GIFT_CARD_TRANSACTIONS : "su dung the"
+    CUSTOMERS ||--o{ GIFT_CARDS : "mua"
+    VOUCHERS ||--o{ VOUCHER_USAGES : "ghi nhan luot"
+    CUSTOMERS ||--o{ VOUCHER_USAGES : "da dung"
+    APPOINTMENTS ||--o| VOUCHER_USAGES : "sinh ra"
+    MEMBERSHIP_TIERS ||--o{ VOUCHERS : "hang toi thieu"
+    CUSTOMERS ||--o{ CUSTOMER_PACKAGES : "so huu"
+    PACKAGES ||--o{ CUSTOMER_PACKAGES : "ban ra"
+    CUSTOMER_PACKAGES ||--|{ CUSTOMER_PACKAGE_BALANCES : "so buoi con"
+    SERVICES ||--o{ CUSTOMER_PACKAGE_BALANCES : "cua dich vu"
+
+    PAYMENTS {
+        bigint id PK
+        bigint appointment_id FK
+        bigint customer_package_id FK
+        bigint gift_card_id FK
+        varchar type "DEPOSIT|FINAL|REFUND|PACKAGE_PURCHASE|GIFTCARD_PURCHASE"
+        varchar method
+        decimal amount
+        varchar status
+        varchar gateway_txn_ref UK "chong IPN trung"
+        datetime paid_at
+        bigint refund_of_payment_id
+    }
+    GIFT_CARDS {
+        bigint id PK
+        varchar code UK
+        decimal face_value
+        decimal sold_price
+        decimal balance
+        date expires_at
+        varchar status
+    }
+    GIFT_CARD_TRANSACTIONS {
+        bigint id PK
+        bigint gift_card_id FK
+        bigint appointment_id FK
+        varchar type "ISSUE|REDEEM|REFUND"
+        decimal amount
+        decimal balance_after
+    }
+    VOUCHERS {
+        bigint id PK
+        varchar code UK
+        varchar discount_type "PERCENT|AMOUNT"
+        decimal discount_value
+        decimal max_discount
+        decimal min_order
+        int usage_limit
+        int used_count
+        int per_customer_limit
+        bigint min_tier_id FK
+        datetime start_at
+        datetime end_at
+    }
+    VOUCHER_USAGES {
+        bigint id PK
+        bigint voucher_id FK
+        bigint customer_id FK
+        bigint appointment_id UK
+        decimal discount_amount
+    }
+    CUSTOMER_PACKAGES {
+        bigint id PK
+        bigint customer_id FK
+        bigint package_id FK
+        decimal purchase_price
+        date expires_at
+        varchar status
+    }
+    CUSTOMER_PACKAGE_BALANCES {
+        bigint id PK
+        bigint customer_package_id FK
+        bigint service_id FK
+        smallint total_sessions
+        smallint remaining_sessions
+        smallint reserved_sessions
+    }
