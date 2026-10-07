@@ -1,0 +1,151 @@
+{
+  "info": {
+    "name": "Nail Service - Thêm và xem toàn bộ",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Chạy 01 → 02 → 03 → 04. categoryId phải là ID category tồn tại (xem GET /api/categories). Request 01 tạo tên mới mỗi lần gửi; request 02 dùng lại tên đó. Trường bắt buộc: categoryId, name, price, durationMinutes."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "categoryId",
+      "value": "1"
+    },
+    {
+      "key": "serviceName",
+      "value": "Nail service test"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - Thêm thành công (201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryId\": {{categoryId}},\n  \"name\": \"{{serviceName}}\",\n  \"price\": 150000,\n  \"durationMinutes\": 45,\n  \"description\": \"Dịch vụ sơn gel dùng để test\",\n  \"imageUrl\": null,\n  \"status\": \"ACTIVE\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/api/services"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"serviceName\", \"Nail test \" + pm.variables.replaceIn(\"{{$guid}}\"));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Thêm trùng tên (409)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryId\": {{categoryId}},\n  \"name\": \"{{serviceName}}\",\n  \"price\": 150000,\n  \"durationMinutes\": 45,\n  \"description\": \"Dịch vụ sơn gel dùng để test\",\n  \"imageUrl\": null,\n  \"status\": \"ACTIVE\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/api/services"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Thiếu name (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"categoryId\": {{categoryId}},\n  \"price\": 150000,\n  \"durationMinutes\": 45,\n  \"status\": \"ACTIVE\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "{{baseUrl}}/api/services"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Xem toàn bộ (200)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/services"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Trả về danh sách\", function () { pm.expect(pm.response.json()).to.be.an(\"array\"); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
