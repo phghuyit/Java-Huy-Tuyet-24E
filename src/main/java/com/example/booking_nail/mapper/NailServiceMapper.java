@@ -1,7 +1,7 @@
 package com.example.booking_nail.mapper;
 
 import com.example.booking_nail.dto.request.NailServiceCreationRequest;
-import com.example.booking_nail.model.NailService;
+import com.example.booking_nail.entity.NailService;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
