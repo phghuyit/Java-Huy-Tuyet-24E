@@ -2,7 +2,7 @@ package com.example.booking_nail.service;
 
 import com.example.booking_nail.dto.request.NailServiceCreationRequest;
 import com.example.booking_nail.mapper.NailServiceMapper;
-import com.example.booking_nail.model.NailService;
+import com.example.booking_nail.entity.NailService;
 import com.example.booking_nail.repository.NailServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

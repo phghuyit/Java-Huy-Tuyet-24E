@@ -1,12 +1,10 @@
-package com.example.booking_nail.model;
+package com.example.booking_nail.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Table(name = "nailServices")
 public class NailService {
     @Id
     @GeneratedValue (strategy= GenerationType.IDENTITY)
