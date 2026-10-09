@@ -6,15 +6,27 @@ import com.example.booking_nail.service.NailServiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/services")
 @RequiredArgsConstructor
 public class NailServiceController {
     private final NailServiceService nailServiceService;
 
-    @PostMapping("/create")
+    @PostMapping
     public NailService createNailService(@RequestBody NailServiceCreationRequest request){
         return nailServiceService.createRequest(request);
+    }
+
+    @GetMapping
+    public List<NailService> getAllNailServices(){
+        return nailServiceService.getAllNailServices();
+    }
+
+    @GetMapping("/{nailServiceId}")
+    public NailService getNailService(@PathVariable("nailServiceId") Long id){
+        return nailServiceService.getNailService(id);
     }
 }
 
