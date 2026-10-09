@@ -1,0 +1,88 @@
+erDiagram
+    SUPPLIERS ||--o{ STOCK_RECEIPTS : "cung cap"
+    STOCK_RECEIPTS ||--|{ STOCK_TRANSACTIONS : "cac dong nhap"
+    MATERIALS ||--o{ STOCK_TRANSACTIONS : "bien dong ton"
+    APPOINTMENT_ITEMS ||--o{ STOCK_TRANSACTIONS : "xuat theo dinh muc"
+    APPOINTMENT_ITEMS ||--o| COMMISSIONS : "sinh hoa hong"
+    COMMISSION_RULES ||--o{ COMMISSIONS : "quy tac ap dung"
+    COMMISSION_PERIODS ||--o{ COMMISSIONS : "chot ky"
+    SERVICES ||--o{ COMMISSION_RULES : "ap cho dich vu"
+    SERVICE_CATEGORIES ||--o{ COMMISSION_RULES : "ap cho nhom"
+    CAMPAIGNS ||--|{ CAMPAIGN_RECIPIENTS : "gui toi"
+    CUSTOMERS ||--o{ CAMPAIGN_RECIPIENTS : "nhan"
+    VOUCHERS ||--o{ CAMPAIGNS : "dinh kem"
+
+    SUPPLIERS {
+        bigint id PK
+        varchar name
+        varchar phone
+    }
+    STOCK_RECEIPTS {
+        bigint id PK
+        varchar code UK
+        bigint supplier_id FK
+        date receipt_date
+        decimal total_amount
+        bigint created_by
+    }
+    STOCK_TRANSACTIONS {
+        bigint id PK
+        bigint material_id FK
+        varchar type "IN|OUT_SERVICE|ADJUST"
+        decimal quantity "duong la tang"
+        decimal balance_after
+        decimal unit_cost
+        bigint receipt_id FK
+        bigint appointment_item_id FK
+        varchar reason "bat buoc khi ADJUST"
+    }
+    COMMISSION_RULES {
+        bigint id PK
+        bigint service_id FK
+        bigint category_id FK
+        varchar staff_level
+        bigint staff_id FK
+        varchar rate_type "PERCENT|FIXED"
+        decimal rate_value
+        date effective_from
+        date effective_to
+    }
+    COMMISSION_PERIODS {
+        bigint id PK
+        date from_date
+        date to_date
+        varchar status "OPEN|CLOSED"
+        decimal total_amount
+        datetime closed_at
+    }
+    COMMISSIONS {
+        bigint id PK
+        bigint staff_id FK
+        bigint appointment_item_id UK
+        bigint rule_id FK
+        bigint period_id FK
+        decimal base_amount
+        varchar rate_type "dong bang"
+        decimal rate_value "dong bang"
+        decimal amount
+        varchar status
+        datetime completed_at
+    }
+    CAMPAIGNS {
+        bigint id PK
+        varchar type "BIRTHDAY|WINBACK|PROMOTION|VOUCHER_GIFT"
+        bigint voucher_id FK
+        bigint target_tier_id FK
+        json target_filter
+        datetime scheduled_at
+        varchar status
+        int total_recipients
+        int sent_count
+    }
+    CAMPAIGN_RECIPIENTS {
+        bigint id PK
+        bigint campaign_id FK
+        bigint customer_id FK
+        varchar status
+        datetime sent_at
+    }

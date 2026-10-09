@@ -1,0 +1,55 @@
+flowchart LR
+    classDef ent fill:#dbeafe,stroke:#1e40af,stroke-width:2px,color:#0f172a,font-weight:bold
+    classDef rel fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#0f172a
+    classDef weak fill:#e0e7ff,stroke:#4338ca,stroke-width:3px,color:#0f172a,font-weight:bold
+
+    KH[KHÁCH HÀNG]:::ent
+    LH[LỊCH HẸN]:::ent
+    DDV[DÒNG DỊCH VỤ]:::weak
+    DV[DỊCH VỤ]:::ent
+    NDV[NHÓM DỊCH VỤ]:::ent
+    TH[THỢ]:::ent
+    CA[CA LÀM VIỆC]:::ent
+    NP[NGHỈ PHÉP]:::ent
+    TN[TÀI NGUYÊN]:::ent
+    DG[ĐÁNH GIÁ]:::ent
+    DSC[DANH SÁCH CHỜ]:::ent
+
+    R_DAT{ĐẶT}:::rel
+    R_GOM{GỒM}:::rel
+    R_LADV{LÀ DỊCH VỤ}:::rel
+    R_THUC{THỰC HIỆN}:::rel
+    R_KYNANG{CÓ KỸ NĂNG}:::rel
+    R_THUOC{THUỘC}:::rel
+    R_XEPCA{ĐƯỢC XẾP}:::rel
+    R_XINNGHI{XIN NGHỈ}:::rel
+    R_CAN{CẦN}:::rel
+    R_CHIEM{CHIẾM DỤNG}:::rel
+    R_DANHGIA{ĐƯỢC ĐÁNH GIÁ}:::rel
+    R_CHO{ĐĂNG KÝ CHỜ}:::rel
+
+    KH ---|1| R_DAT
+    R_DAT ---|N| LH
+    LH ---|1| R_GOM
+    R_GOM ---|N| DDV
+    DV ---|1| R_LADV
+    R_LADV ---|N| DDV
+    TH ---|1| R_THUC
+    R_THUC ---|N| DDV
+    TH ---|N| R_KYNANG
+    R_KYNANG ---|N| DV
+    NDV ---|1| R_THUOC
+    R_THUOC ---|N| DV
+    TH ---|1| R_XEPCA
+    R_XEPCA ---|N| CA
+    TH ---|1| R_XINNGHI
+    R_XINNGHI ---|N| NP
+    DV ---|N| R_CAN
+    R_CAN ---|N| TN
+    TN ---|1| R_CHIEM
+    R_CHIEM ---|N| DDV
+    LH ---|1| R_DANHGIA
+    R_DANHGIA ---|1| DG
+    KH ---|1| R_CHO
+    R_CHO ---|N| DSC
+    DV ---|1| R_CHO

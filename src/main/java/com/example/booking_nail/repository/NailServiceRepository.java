@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NailServiceRepository extends JpaRepository<NailService, Long> {
-
+    boolean existsByCategoryId(Long categoryId);
+    boolean existsByNameIgnoreCase(String name);
+    boolean existsByNameIgnoreCaseAndIdNot(String name, Long id);
 }

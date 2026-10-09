@@ -3,8 +3,8 @@ package com.example.booking_nail.entity;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
+@Table(name="nailService")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-@Table(name = "nailServices")
 public class NailService {
     @Id
     @GeneratedValue (strategy= GenerationType.IDENTITY)

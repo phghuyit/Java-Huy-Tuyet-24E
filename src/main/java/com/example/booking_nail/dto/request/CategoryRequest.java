@@ -5,12 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class NailServiceUpdateRequest {
-    private Long categoryId;
+public class CategoryRequest {
     private String name;
-    private Double price;
-    private Integer durationMinutes;
     private String description;
-    private String imageUrl;
     private String status;
 }
