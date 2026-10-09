@@ -7,6 +7,8 @@ import com.example.booking_nail.repository.NailServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service @RequiredArgsConstructor
 public class NailServiceService {
     private final NailServiceRepository nailServiceRepository;
@@ -18,4 +20,11 @@ public class NailServiceService {
         return nailServiceRepository.save(nailService);
     }
 
+    public List<NailService> getAllNailServices(){
+        return nailServiceRepository.findAll();
+    }
+
+    public NailService getNailService(Long id){
+        return nailServiceRepository.findById(id).orElseThrow(()->new RuntimeException("Khong tim thay dich vu nai co so id: "+id));
+    }
 }
