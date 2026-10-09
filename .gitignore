@@ -13,7 +13,7 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -34,6 +34,23 @@ build/
 ### VS Code ###
 .vscode/
 
+### Database Clients ###
+.dbeaver/
+*.sql.bak
+
+### Logs & JVM Dumps ###
+*.log
+logs/
+hs_err_pid*
+replay_pid*
+
+### Environment & Local Configs ###
+.env
+.env.local
+application-local.yaml
+application-local.properties
+
 ### OS Files ###
 .DS_Store
 Thumbs.db
+desktop.ini
