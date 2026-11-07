@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#ebe6df"/>
+  <rect x="360" y="240" width="80" height="80" rx="16" fill="#ded7cd"/>
+  <circle cx="400" cy="272" r="16" stroke="#8f8477" stroke-width="3" fill="none"/>
+  <path d="M380 306c0-11 9-20 20-20s20 9 20 20" stroke="#8f8477" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <text x="400" y="356" fill="#6f6559" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" text-anchor="middle" letter-spacing="1">VELA SALON</text>
+  <text x="400" y="380" fill="#9f9486" font-family="system-ui, -apple-system, sans-serif" font-size="13" text-anchor="middle">Hình ảnh minh họa</text>
+</svg>

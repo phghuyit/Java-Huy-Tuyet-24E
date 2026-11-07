@@ -1,56 +1,76 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
+# =====================================================================
+# Backend (Spring Boot / Maven)
+# =====================================================================
+**/target/
 !**/src/main/**/target/
 !**/src/test/**/target/
+!**/.mvn/wrapper/maven-wrapper.jar
+**/uploads/
+**/ERD/
+**/test-data/*-results.json
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# =====================================================================
+# Frontend (Next.js / Node.js)
+# =====================================================================
+**/node_modules/
+**/.next/
+**/out/
+**/build/
+**/.npm-cache/
+*.tsbuildinfo
+next-env.d.ts
 
-### IntelliJ IDEA ###
-.idea/
+# =====================================================================
+# Environment & Local Configs (Keep .env.example tracked)
+# =====================================================================
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+**/application-local.yaml
+**/application-local.yml
+**/application-local.properties
+
+# =====================================================================
+# IDEs & Editors (IntelliJ IDEA, Eclipse/STS, VS Code, NetBeans, DBeaver)
+# =====================================================================
+**/.idea/
 *.iws
 *.iml
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-### Database Clients ###
-.dbeaver/
+**/.vscode/
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings/
+**/.springBeans
+**/.sts4-cache
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+**/.dbeaver/
 *.sql.bak
 
-### Logs & JVM Dumps ###
+# =====================================================================
+# Logs & JVM Dumps
+# =====================================================================
 *.log
-logs/
+**/logs/
 hs_err_pid*
 replay_pid*
 
-### Environment & Local Configs ###
-.env
-.env.local
-application-local.yaml
-application-local.properties
-
-### OS Files ###
+# =====================================================================
+# AI / Agent Tooling & OS Files
+# =====================================================================
+.agents/
+graphify-out/
+**/AGENTS.md
+**/CLAUDE.md
 .DS_Store
 Thumbs.db
 desktop.ini

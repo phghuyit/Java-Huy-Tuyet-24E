@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+build/
+.npm-cache/
+.env
+.env*.local
+!.env.example
+*.log
+*.tsbuildinfo
+next-env.d.ts
+AGENTS.md
+CLAUDE.md
+.DS_Store
+Thumbs.db
+desktop.ini
