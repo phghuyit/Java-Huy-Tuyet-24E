@@ -32,7 +32,7 @@ Java-Huy-Tuyet-24E/              # Thư mục gốc của kho lưu trữ (Reposi
 │   ├── src/main/java/           # Controllers, Services, Repositories, Entities, Seeders
 │   ├── src/main/resources/      # application.yaml (Cấu hình Database & Server)
 │   ├── src/test/java/           # Kiểm thử tích hợp (Integration Tests) & Unit Tests
-│   ├── docs/                    # Tài liệu kỹ thuật & đặc tả API
+│   ├── docs/                    # Tài liệu kỹ thuật & file SQL dữ liệu mẫu (java_booking_nail.sql)
 │   ├── test-data/               # Bộ sưu tập Postman & dữ liệu kiểm thử mẫu
 │   └── .env.example             # File mẫu biến môi trường cho Backend
 ├── frontend/                    # Mã nguồn Frontend Next.js & Cổng Quản Trị (Chạy tại cổng 3000)
@@ -73,8 +73,9 @@ cd Java-Huy-Tuyet-24E
 
 ### Bước 2: Khởi động MySQL (Dùng XAMPP hoặc MySQL Workbench / Docker)
 
-> **💡 Dạ vâng, hệ thống tự động tạo Database & dữ liệu mẫu (Không cần import file `.sql`):**  
-> Dạ Thầy/Cô **không cần** tạo database thủ công hay import file `.sql` trong phpMyAdmin / MySQL Workbench ạ. Ngay khi Backend khởi động lần đầu, hệ thống của bọn em sẽ tự động tạo database `java_booking_nail` (`createDatabaseIfNotExist=true`), tự động sinh toàn bộ bảng qua Hibernate JPA và nạp sẵn dữ liệu mẫu (danh mục, dịch vụ, nhân viên, lịch hẹn, mã giảm giá, sản phẩm, đánh giá và các tài khoản mẫu) để Thầy/Cô thuận tiện kiểm thử ngay.
+> **💡 Dạ vâng, hệ thống tự động tạo Database & dữ liệu mẫu (Hoặc có sẵn file SQL trong `docs/`):**  
+> - **Tự động (Khuyên dùng):** Ngay khi Backend khởi động lần đầu, hệ thống sẽ tự động tạo database `java_booking_nail` (`createDatabaseIfNotExist=true`), tự động sinh toàn bộ bảng qua Hibernate JPA và nạp sẵn dữ liệu mẫu.  
+> - **Import thủ công (Tùy chọn):** Nếu Thầy/Cô muốn xem trước hoặc import trực tiếp bằng phpMyAdmin / MySQL Workbench, bọn em cũng đã xuất sẵn file dữ liệu đầy đủ tại đường dẫn: [`Java-Huy-Tuyet-24E/docs/java_booking_nail.sql`](./Java-Huy-Tuyet-24E/docs/java_booking_nail.sql) (tương thích với cả XAMPP MariaDB và MySQL 8.x).
 
 #### Cách A: Nếu Thầy/Cô sử dụng XAMPP (Mật khẩu `root` mặc định để trống `""`)
 1. Mở **XAMPP Control Panel** và bấm **Start** tại dòng **MySQL** (đảm bảo MySQL đang chạy ở cổng `3306`).
