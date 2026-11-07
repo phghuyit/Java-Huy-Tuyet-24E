@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #f4f0e9;
+  --color-paper: #fafaf8;
+  --color-ink: #181715;
+  --color-void: #11110f;
+  --color-char: #1c1b19;
+  --color-champagne: #c6a875;
+  --color-nude: #d9c7b8;
+
+  --color-signal-live: #7cc39b;
+  --color-signal-warn: #d8a657;
+  --color-signal-stop: #c4715f;
+  --color-signal-info: #8aa6bd;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  --text-d0: clamp(3rem, 5.8vw, 7.5rem);
+  --text-d0--line-height: 1.04;
+  --text-d0--letter-spacing: -0.035em;
+
+  --text-d1: clamp(2.5rem, 6vw, 6.5rem);
+  --text-d1--line-height: 1.04;
+  --text-d1--letter-spacing: -0.03em;
+
+  --text-d2: clamp(2rem, 4.6vw, 4.25rem);
+  --text-d2--line-height: 1.08;
+  --text-d2--letter-spacing: -0.025em;
+
+  --text-d3: clamp(1.5rem, 3vw, 2.6rem);
+  --text-d3--line-height: 1.04;
+  --text-d3--letter-spacing: -0.02em;
+
+  --text-d4: clamp(1.3rem, 2.2vw, 1.85rem);
+  --text-d4--line-height: 1.1;
+  --text-d4--letter-spacing: -0.015em;
+
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.22em;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-swift: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --animate-marquee: marquee 44s linear infinite;
+  --animate-marquee-slow: marquee 80s linear infinite;
+  --animate-shimmer: shimmer 1.6s var(--ease-swift) infinite;
+  --animate-scroll-cue: scroll-cue 2.6s var(--ease-editorial) infinite;
+
+  --animate-fade-in: fade-in 200ms var(--ease-swift) both;
+  --animate-fade-out: fade-out 160ms var(--ease-swift) both;
+  --animate-pop-in: pop-in 220ms var(--ease-editorial) both;
+  --animate-pop-out: pop-out 160ms var(--ease-swift) both;
+  --animate-drawer-in: drawer-in 280ms var(--ease-editorial) both;
+  --animate-drawer-out: drawer-out 200ms var(--ease-swift) both;
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes scroll-cue {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes pop-out {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.98);
+    }
+  }
+
+  @keyframes drawer-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes drawer-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+  }
+
+  .font-display {
+    font-optical-sizing: auto;
+  }
+
+  [data-surface="dark"] * {
+    border-color: color-mix(in oklab, var(--color-paper) 12%, transparent);
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1;
+}
+
+@utility gutter {
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 4rem;
+  }
+
+  @media (width >= 110rem) {
+    padding-inline: 5.5rem;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
+@utility hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-paper) 18%, transparent) transparent;
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  [data-tone="dark"],
+  [data-tone="dark"] * {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: transparent !important;
+    color: #000 !important;
+    border-color: rgba(0, 0, 0, 0.25) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .print\:hidden,
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  tr,
+  thead {
+    break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+}

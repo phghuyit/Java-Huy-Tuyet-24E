@@ -1,0 +1,52 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+    session:
+      timeout: 30m
+      tracking-modes: cookie
+      cookie:
+        http-only: true
+        same-site: lax
+        secure: "${SESSION_COOKIE_SECURE:false}"
+
+app:
+  upload:
+    avatar-dir: "${AVATAR_UPLOAD_DIR:./uploads/avatars}"
+  bootstrap-admin:
+    enabled: "${BOOTSTRAP_ADMIN_ENABLED:false}"
+    email: "${BOOTSTRAP_ADMIN_EMAIL:}"
+    password: "${BOOTSTRAP_ADMIN_PASSWORD:}"
+    phone: "${BOOTSTRAP_ADMIN_PHONE:}"
+    name: "${BOOTSTRAP_ADMIN_NAME:Quản trị VELA}"
+  frontend-url: "${FRONTEND_URL:http://localhost:3000}"
+  seed-data:
+    enabled: "${SEED_DATA_ENABLED:true}"
+
+spring:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 3MB
+  mvc:
+    problemdetails:
+      enabled: true
+  datasource:
+    url: "${DB_URL:jdbc:mysql://localhost:3306/java_booking_nail?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8}"
+    username: "${DB_USERNAME:root}"
+    password: "${DB_PASSWORD:root}"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

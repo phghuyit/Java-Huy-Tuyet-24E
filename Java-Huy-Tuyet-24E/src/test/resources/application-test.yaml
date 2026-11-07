@@ -1,0 +1,20 @@
+# Database riêng cho kiểm thử, không ghi vào MySQL của đồ án.
+spring:
+  datasource:
+    url: jdbc:h2:mem:booking_nail_test;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+app:
+  bootstrap-admin:
+    enabled: true
+    email: integration-admin@example.com
+    password: IntegrationLogin!2026
+    phone: "0909990001"
+  seed-data:
+    enabled: false
